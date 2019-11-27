@@ -1,0 +1,7 @@
+const eventActionTypes = {
+    FETCH_EVENT_START : 'FETCH_EVENT_START',
+    FETCH_EVENT_SUCCESS : 'FETCH_EVENT_SUCCESS',
+    FETCH_EVENT_FAILURE : 'FETCH_EVENT_FAILURE'
+}
+
+export default eventActionTypes

@@ -1,4 +1,4 @@
 const db = require('./db')
-const User = require('../db/models/user.model')
+const {User, Event} = require('../db/models/user.model')
 
-module.exports = {db,User}
+module.exports = {db,User,Event}

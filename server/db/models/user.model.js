@@ -18,4 +18,19 @@ const User = db.define('user',{
       },
 })
 
-module.exports = User
+const Event = db.define('event',{
+  Name: {
+      type: STRING,
+      allowNull: false
+    },
+  Year: {
+      type: STRING,
+      allowNull: false
+    },
+  Description: {
+      type: STRING,
+      allowNull: false
+    },
+})
+
+module.exports = {User,Event}

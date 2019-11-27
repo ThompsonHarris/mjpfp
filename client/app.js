@@ -1,8 +1,23 @@
 import React from 'react'
 
-class App extends React.Component{
+//utils
+import {fetchEventStartAsnyc,deleteEventStartAsync} from './redux/events/events.actions'
+import {connect} from 'react-redux'
 
-     checkDate = (month, year) => {
+//components
+import AddEvent from './components/addEvent/addEvent.component'
+import UpdateEvent from './components/updateEvent/updateEvent.component'
+
+class App extends React.Component{
+    constructor(props){
+        super(props)
+    }
+
+    componentDidMount(){
+        this.props.fetchEventStartAsnyc()
+    }
+
+    checkDate = (month, year) => {
         const currentMonth = {
             inputData: `${month} ${year}`,
             StartingDay:new Date(year, month, 1).getDay(),
@@ -12,15 +27,33 @@ class App extends React.Component{
     }
 
     render(){
+        const currentDate = Date.now();
         return(
             <div>
-              React is running
+              React is running {currentDate}
+              <ul>
               {
-                  console.log(this.checkDate(2,1985))
+                this.props.events.map(({id, Name, Year, Description})=>{
+                    return(
+                        <li key={id}>{id} {Name} {Year} {Description}<a onClick={(e)=>this.props.deleteEventStartAsync(id)}> - </a></li>
+                    ) 
+                })
               }
+              </ul>
+              <AddEvent/>
+              <UpdateEvent/>
             </div>
         )
     }
 }
 
-export default App
+const mapDispatchToProps = dispatch => ({
+    fetchEventStartAsnyc: ()=>dispatch(fetchEventStartAsnyc()),
+    deleteEventStartAsync: (id)=>dispatch(deleteEventStartAsync(id))
+})
+
+const mapStateToProps = state =>({
+    events: state.eventsDir.events
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(App)

@@ -3,7 +3,8 @@ const {db} = require('./db/index')
 const seed = require('./db/seed')
 const PORT  = process.env.PORT || 3000
 
-db.sync()
+db.sync({force: true})
+    .then(()=>{seed()})
     .then(()=>{
         app.listen(PORT, ()=>{
             console.log("I'm running", PORT)
