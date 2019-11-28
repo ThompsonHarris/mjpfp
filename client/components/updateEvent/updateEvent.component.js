@@ -9,6 +9,8 @@ class UpdateEvent extends React.Component{
             id: '',
             name: '',
             year: '',
+            month: '',
+            day: '',
             description: ''
         }
     }
@@ -16,7 +18,6 @@ class UpdateEvent extends React.Component{
         this.setState({
             [e.target.name]:e.target.value
         })
-        console.log(this.state)
     }
 
     onHandleSubmit=(e)=>{
@@ -24,6 +25,8 @@ class UpdateEvent extends React.Component{
         const payload = {
             Name: this.state.name,
             Year: this.state.year,
+            Month: this.state.month,
+            Day: this.state.day,
             Description: this.state.description
         }
         this.props.updateEventStartAsync(Number(this.state.id),payload)
@@ -31,6 +34,8 @@ class UpdateEvent extends React.Component{
             id: '',
             name: '',
             year: '',
+            month: '',
+            day: '',
             description: ''
         })
     }
@@ -46,7 +51,11 @@ class UpdateEvent extends React.Component{
                     <input name='name' placeholder='name' onChange={(e)=>this.onChangeHandler(e)} value={this.state.name}></input>
                     <label>year</label>
                     <input name='year' placeholder='year' onChange={(e)=>this.onChangeHandler(e)} value={this.state.year}></input>
-                    <label>name</label>
+                    <label>month</label>
+                    <input name='month' placeholder='month' onChange={(e)=>this.onChangeHandler(e)} value={this.state.month}></input>
+                    <label>day</label>
+                    <input name='day' placeholder='day' onChange={(e)=>this.onChangeHandler(e)} value={this.state.day}></input>
+                    <label>description</label>
                     <input name='description' placeholder='description' onChange={(e)=>this.onChangeHandler(e)} value={this.state.description}></input>
                     <button>Update</button>
                 </form>

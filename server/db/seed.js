@@ -22,11 +22,15 @@ const seed = () => {
         {
             Name: 'Halloween',
             Year: '2019',
+            Month: '10',
+            Day: '23',
             Description: 'for ghosts and goblins'
         },
         {
             Name: 'Chistmas',
-            Year: '2020',
+            Year: '2029',
+            Month: '12',
+            Day: '25',
             Description: 'for ginger bread men and raindear'
         }
     ]

@@ -7,10 +7,6 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../static')));
 
-app.get('/',(req,res,next)=>{
-    res.send('hey')
-})
-
 app.get('/users',(req,res,next)=>{
     User.findAll()
     .then(data=>{

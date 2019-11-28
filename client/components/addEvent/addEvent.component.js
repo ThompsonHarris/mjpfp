@@ -8,6 +8,8 @@ class AddEvent extends React.Component{
         this.state={
             name: '',
             year: '',
+            month: '',
+            day: '',
             description: ''
         }
     }
@@ -22,12 +24,16 @@ class AddEvent extends React.Component{
         const payload = {
             Name: this.state.name,
             Year: this.state.year,
+            Month: this.state.month,
+            Day: this.state.day,
             Description: this.state.description
         }
         this.props.createEventStartAsync(payload)
         this.setState({
             name: '',
             year: '',
+            month: '',
+            day: '',
             description: ''
         })
     }
@@ -41,6 +47,10 @@ class AddEvent extends React.Component{
                     <input name='name' placeholder='name' onChange={(e)=>this.onChangeHandler(e)} value={this.state.name}></input>
                     <label>year</label>
                     <input name='year' placeholder='year' onChange={(e)=>this.onChangeHandler(e)} value={this.state.year}></input>
+                    <label>month</label>
+                    <input name='month' placeholder='month' onChange={(e)=>this.onChangeHandler(e)} value={this.state.month}></input>
+                    <label>day</label>
+                    <input name='day' placeholder='day' onChange={(e)=>this.onChangeHandler(e)} value={this.state.day}></input>
                     <label>name</label>
                     <input name='description' placeholder='description' onChange={(e)=>this.onChangeHandler(e)} value={this.state.description}></input>
                     <button>Submit</button>

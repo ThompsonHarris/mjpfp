@@ -29,6 +29,8 @@ const eventReducer = (state=INITIAL_STATE, action) => {
                     id: '',
                     Name: '',
                     Year: '',
+                    Month: '',
+                    Day: '',
                     Description: ''}
                 ]
             }
