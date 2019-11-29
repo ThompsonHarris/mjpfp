@@ -27,8 +27,16 @@ const seed = () => {
             Description: 'for ghosts and goblins'
         },
         {
+            Name: 'Thanksgiving',
+            Year: '2019',
+            Month: '11',
+            Day: '28',
+            Description: 'for fat Prilgrims and turkey'
+        }
+        ,
+        {
             Name: 'Chistmas',
-            Year: '2029',
+            Year: '2019',
             Month: '12',
             Day: '25',
             Description: 'for ginger bread men and raindear'

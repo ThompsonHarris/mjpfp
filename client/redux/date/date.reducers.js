@@ -1,6 +1,9 @@
 import dateActionTypes from './date.types'
 
-const INITIAL_STATE = {}
+const INITIAL_STATE = {
+    current: ['test'],
+    curMonthNum: 0
+}
 
 const dateReducer = (state=INITIAL_STATE, action)=>{
     switch(action.type){
@@ -14,16 +17,18 @@ const dateReducer = (state=INITIAL_STATE, action)=>{
             ...state,
             daysNum: action.payload
         }
-        case(dateActionTypes.SET_CURRENT_MONTH):
+        case(dateActionTypes.SET_CURRENT_MONTH_NUM):
         return{
             ...state,
-            curMonth: action.payload
+            curMonthNum: action.payload
+        }
+        case(dateActionTypes.SET_CURRENT_MONTH_STR):
+        return{
+            ...state,
+            curMonthStr: action.payload
         }
         default:
-            return{
-                ...state,
-                current: {}
-            }
+             return state
     }
 }
 

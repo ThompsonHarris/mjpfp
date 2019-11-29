@@ -14,6 +14,21 @@ app.get('/users',(req,res,next)=>{
     })
 })
 
+app.get('/api/events/month/:id',(req,res,next)=>{
+    const id = req.params.id
+    Event.findAll({
+        where: {
+            Month: id
+        }
+    })
+    .then(data=>{
+        res.status(200).send(data)
+    })
+    .catch(err=>{
+        res.status(400).send(err.message)
+    })
+})
+
 app.delete('/api/events/:id',(req,res,next)=>{
     const id = req.params.id
     Event.destroy({

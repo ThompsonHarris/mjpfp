@@ -12,13 +12,26 @@ export const fetchEventSuccess = (eventData) => ({
 
 export const fetchEventFailure = (errorMessage) => ({
     type:eventActionTypes.FETCH_EVENT_FAILURE,
-    payload:eventData
+    payload:errorMessage
 })
 
-export const fetchEventStartAsnyc = () => {
+export const fetchAllEventStartAsnyc = () => {
     return dispatch => {
         dispatch(fetchEventStart)
         axios.get('/api/events')
+        .then((res)=>{
+            dispatch(fetchEventSuccess(res.data))
+        })
+        .catch((err)=>{
+            dispatch(fetchEventFailure(err.message))
+        })
+    }
+}
+
+export const fetchMonthEventStartAsnyc = (id) => {
+    return dispatch => {
+        dispatch(fetchEventStart)
+        axios.get(`/api/events/month/${id}`)
         .then((res)=>{
             dispatch(fetchEventSuccess(res.data))
         })
@@ -32,7 +45,7 @@ export const createEventStartAsync = (obj) => {
     return dispatch =>{
         axios.post('/api/events', obj)
         .then((res=>{
-            dispatch(fetchEventStartAsnyc())
+            dispatch(fetchMonthEventStartAsnyc(11))
         }))
         .catch((err)=>{
             dispatch(fetchEventFailure(err.message))

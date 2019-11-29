@@ -1,6 +1,16 @@
 import eventActionTypes from './events.types'
 
-const INITIAL_STATE = {}
+const INITIAL_STATE = {
+    events:[
+        {
+        id: '',
+        Name: '',
+        Year: '',
+        Month: '',
+        Day: '',
+        Description: ''}
+    ]
+}
 
 const eventReducer = (state=INITIAL_STATE, action) => {
     switch(action.type){
@@ -22,18 +32,7 @@ const eventReducer = (state=INITIAL_STATE, action) => {
             errorMessage: action.payload
         }
         default:
-            return{
-                ...state,
-                events:[
-                    {
-                    id: '',
-                    Name: '',
-                    Year: '',
-                    Month: '',
-                    Day: '',
-                    Description: ''}
-                ]
-            }
+             return state
     }
 }
 

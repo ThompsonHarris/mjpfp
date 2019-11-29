@@ -11,19 +11,27 @@ export const setDaysInMonth = (num) => ({
     payload: num
 })
 
-export const setCurrentMonth = (month) => ({
-    type:dateActionTypes.SET_CURRENT_MONTH,
+export const setCurrentMonthNum = (month) => ({
+    type:dateActionTypes.SET_CURRENT_MONTH_NUM,
+    payload: month
+})
+
+export const setCurrentMonthStr = (month) => ({
+    type:dateActionTypes.SET_CURRENT_MONTH_STR,
     payload: month
 })
 
 export const callCurrentThenSet = () => {
     return dispatch => {
-        let currentTime  = moment()
-        let numdays = currentTime.daysInMonth()
-        let currentMonth = currentTime.format("MMMM")
+        let m  = moment()
+        let numdays = m.daysInMonth()
+        let currentMonthNum = m.month()
+        let currentMonthStr = m.format("MMMM")
         dispatch(setDaysInMonth(numdays))
-        dispatch(setCurrentMonth(currentMonth))
-        dispatch(setCurrentDate(currentTime))
+        dispatch(setCurrentMonthNum(currentMonthNum+1))
+        dispatch(setCurrentMonthStr(currentMonthStr))
+        dispatch(setCurrentDate(m))
+        
     }
 }
 
@@ -31,9 +39,11 @@ export const backOneMonthThenSet = (dateObj) => {
     return dispatch => {
         let newTime = dateObj.subtract(1, 'months')
         let numdays = newTime.daysInMonth()
-        let currentMonth = newTime.format("MMMM")
+        let currentMonthNum = newTime.month()
+        let currentMonthStr = newTime.format("MMMM")
         dispatch(setDaysInMonth(numdays))
-        dispatch(setCurrentMonth(currentMonth))
+        dispatch(setCurrentMonthNum(currentMonthNum+1))
+        dispatch(setCurrentMonthStr(currentMonthStr))
         dispatch(setCurrentDate(newTime))
     }
 }
@@ -42,9 +52,11 @@ export const addOneMonthThenSet = (dateObj) => {
     return dispatch => {
         let newTime = dateObj.add(1, 'months')
         let numdays = newTime.daysInMonth()
-        let currentMonth = newTime.format("MMMM")
+        let currentMonthNum = newTime.month()
+        let currentMonthStr = newTime.format("MMMM")
         dispatch(setDaysInMonth(numdays))
-        dispatch(setCurrentMonth(currentMonth))
+        dispatch(setCurrentMonthNum(currentMonthNum+1))
+        dispatch(setCurrentMonthStr(currentMonthStr))
         dispatch(setCurrentDate(newTime))
     }
 }

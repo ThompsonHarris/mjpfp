@@ -7,7 +7,9 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'static'),
     filename: 'main.js',
+    sourceMapFilename: 'main.js.map',
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
