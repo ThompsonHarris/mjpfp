@@ -21,13 +21,21 @@ export const setCurrentMonthStr = (month) => ({
     payload: month
 })
 
+export const setCurrentYear = (year) => ({
+    type:dateActionTypes.SET_CURRENT_YEAR,
+    payload: year
+})
+
+
 export const callCurrentThenSet = () => {
     return dispatch => {
         let m  = moment()
         let numdays = m.daysInMonth()
+        let curYear = m.year()
         let currentMonthNum = m.month()
         let currentMonthStr = m.format("MMMM")
         dispatch(setDaysInMonth(numdays))
+        dispatch(setCurrentYear(curYear))
         dispatch(setCurrentMonthNum(currentMonthNum+1))
         dispatch(setCurrentMonthStr(currentMonthStr))
         dispatch(setCurrentDate(m))
@@ -39,9 +47,11 @@ export const backOneMonthThenSet = (dateObj) => {
     return dispatch => {
         let newTime = dateObj.subtract(1, 'months')
         let numdays = newTime.daysInMonth()
+        let curYear = newTime.year()
         let currentMonthNum = newTime.month()
         let currentMonthStr = newTime.format("MMMM")
         dispatch(setDaysInMonth(numdays))
+        dispatch(setCurrentYear(curYear))
         dispatch(setCurrentMonthNum(currentMonthNum+1))
         dispatch(setCurrentMonthStr(currentMonthStr))
         dispatch(setCurrentDate(newTime))
@@ -52,9 +62,11 @@ export const addOneMonthThenSet = (dateObj) => {
     return dispatch => {
         let newTime = dateObj.add(1, 'months')
         let numdays = newTime.daysInMonth()
+        let curYear = newTime.year()
         let currentMonthNum = newTime.month()
         let currentMonthStr = newTime.format("MMMM")
         dispatch(setDaysInMonth(numdays))
+        dispatch(setCurrentYear(curYear))
         dispatch(setCurrentMonthNum(currentMonthNum+1))
         dispatch(setCurrentMonthStr(currentMonthStr))
         dispatch(setCurrentDate(newTime))

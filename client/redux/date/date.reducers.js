@@ -27,6 +27,11 @@ const dateReducer = (state=INITIAL_STATE, action)=>{
             ...state,
             curMonthStr: action.payload
         }
+        case(dateActionTypes.SET_CURRENT_YEAR):
+        return{
+            ...state,
+            curYear: action.payload
+        }
         default:
              return state
     }

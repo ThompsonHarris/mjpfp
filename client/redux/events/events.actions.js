@@ -41,11 +41,11 @@ export const fetchMonthEventStartAsnyc = (id) => {
     }
 }
 
-export const createEventStartAsync = (obj) => {
+export const createEventStartAsync = (obj,month) => {
     return dispatch =>{
         axios.post('/api/events', obj)
         .then((res=>{
-            dispatch(fetchMonthEventStartAsnyc(11))
+            dispatch(fetchMonthEventStartAsnyc(month))
         }))
         .catch((err)=>{
             dispatch(fetchEventFailure(err.message))
@@ -53,11 +53,11 @@ export const createEventStartAsync = (obj) => {
     }
 }
 
-export const deleteEventStartAsync = (id) => {
+export const deleteEventStartAsync = (id,month) => {
     return dispatch =>{
         axios.delete(`/api/events/${id}`)
         .then((res=>{
-            dispatch(fetchEventStartAsnyc())
+            dispatch(fetchMonthEventStartAsnyc(month))
         }))
         .catch((err)=>{
             dispatch(fetchEventFailure(err.message))

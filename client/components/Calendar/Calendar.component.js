@@ -25,7 +25,6 @@ class Calendar extends React.Component{
         }
     }
 
-
     render(){
         return(
             <div class='calendar'>
@@ -34,25 +33,11 @@ class Calendar extends React.Component{
                 <a onClick={()=>this.props.addOneMonthThenSet(this.props.currentDate)}> + </a>
                 {
                     new Array(this.props.num).fill(0).map((val,idx)=>{
-                        if(this.props.currentEvents.length === 0){
-                                return(
-                                    <Card day={idx} selected='false'/>
-                                ) 
-                        }else{
-                            return this.props.currentEvents.reduce((acc,event)=>{
-                                if(idx+1===event.Day){
-                                    
-                                     acc = <Card day={idx} selected='true'/>
-                                    
-                                } else {
-                                    
-                                      acc=  <Card day={idx} selected='false'/>
-                                    
-                                }
-                                return acc
-                            },'')
+                            return (
+                                <Card year={this.props.year} month={this.props.month} day={idx+1}/>
+                            )
                         }   
-                    })
+                    )
                 }
             </div>
         )
@@ -71,8 +56,8 @@ const mapStateToProps = state => ({
     currentDate: state.date.current,
     num: state.date.daysNum, 
     month: state.date.curMonthNum,
+    year: state.date.curYear,
     currentEvents: state.eventsDir.events
-
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Calendar)

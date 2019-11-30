@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {createEventStartAsync} from '../../redux/events/events.actions'
+import {navToggleMenu} from '../../redux/nav/nav.actions'
 
 class AddEvent extends React.Component{
     constructor(props){
@@ -28,7 +29,8 @@ class AddEvent extends React.Component{
             Day: this.state.day,
             Description: this.state.description
         }
-        this.props.createEventStartAsync(payload)
+        this.props.createEventStartAsync(payload,this.props.month)
+        this.props.navToggleMenu()
         this.setState({
             name: '',
             year: '',
@@ -61,7 +63,12 @@ class AddEvent extends React.Component{
 }
 
 const mapDispatchToProps = dispatch =>({
-    createEventStartAsync: (payload)=>dispatch(createEventStartAsync(payload))
+    createEventStartAsync: (payload,month)=>dispatch(createEventStartAsync(payload,month)),
+    navToggleMenu: ()=>dispatch(navToggleMenu())
 })
 
-export default connect(null,mapDispatchToProps)(AddEvent)
+const mapStateToProps = state => ({
+    month: state.date.curMonthNum,
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddEvent)
