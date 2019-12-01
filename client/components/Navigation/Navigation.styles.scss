@@ -1,0 +1,21 @@
+.navigation {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100vw;
+    height: 5rem;
+    background-color: black;
+    color: white;
+
+    &__title {
+        font-size: 3.5rem;
+        text-transform: uppercase;
+        text-align: center;
+        flex-grow: 1;
+        align-self: center;
+    }
+
+    &__button {
+        font-size: 3.5rem;
+        align-self: center;
+    }
+}

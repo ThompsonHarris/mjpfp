@@ -6,6 +6,9 @@ import {connect} from 'react-redux'
 import {createEventStartAsync,deleteEventStartAsync} from '../../redux/events/events.actions'
 import {toggleAndSetType} from '../../redux/nav/nav.actions'
 
+//Components
+import Task from '../Task/Task.components'
+
 class Card extends React.Component{
     constructor(props){
         super(props)
@@ -25,21 +28,18 @@ class Card extends React.Component{
 
    render(){
        return(
-        <div class='card'>
-        day {this.props.day} 
+        <div className='card'>
+        <div className='card__num'>{this.props.day}</div>
         {
             this.props.events.map(({id,Name,Year,Month,Day,Description})=>{
                 if(this.props.year===Year && this.props.month===Month && this.props.day===Day){
                     return (
-                        <div>
-                        <a onClick={(e)=>this.props.toggleAndSetType('update')}>{Name}</a>
-                        {Description}
-                        </div>
+                        <Task id={id} name={Name} year={Year} day={Day} description={Description} />
                     )
                 }
             })
         }
-        <div onClick={(e)=>this.props.toggleAndSetType('add')}>+</div>
+        <div className='card__add' onClick={(e)=>this.props.toggleAndSetType('add')}>+</div>
         </div>
     )
 }

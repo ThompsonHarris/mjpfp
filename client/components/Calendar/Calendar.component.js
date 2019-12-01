@@ -8,6 +8,9 @@ import {fetchMonthEventStartAsnyc,fetchAllEventStartAsnyc} from '../../redux/eve
 
 //component
 import Card from '../card/card.component'
+import Navigation from '../Navigation/Navigation.component'
+import Footer from '../Footer/Footer.component'
+import CardEmpty from '../CardEmpty/CardEmpty.component'
 
 class Calendar extends React.Component{
     constructor(props){
@@ -26,19 +29,38 @@ class Calendar extends React.Component{
     }
 
     render(){
+        const remainingDays = Math.abs(((this.props.startDay+this.props.num)%7)-7)===7?0:Math.abs(((this.props.startDay+this.props.num)%7)-7)
+        console.log(remainingDays)
         return(
             <div class='calendar'>
-                <a onClick={()=>this.props.backOneMonthThenSet(this.props.currentDate)}> + </a>
-                {this.props.month}
-                <a onClick={()=>this.props.addOneMonthThenSet(this.props.currentDate)}> + </a>
-                {
-                    new Array(this.props.num).fill(0).map((val,idx)=>{
+                <Navigation/>
+                    <div className='calendar__grid'>
+                    {
+                        new Array(this.props.startDay).fill(0).map((val,idx)=>{
                             return (
-                                <Card year={this.props.year} month={this.props.month} day={idx+1}/>
+                                <CardEmpty/>
                             )
                         }   
                     )
-                }
+                    }
+                    {
+                        new Array(this.props.num).fill(0).map((val,idx)=>{
+                                return (
+                                    <Card year={this.props.year} month={this.props.month} day={idx+1}/>
+                                )
+                            }   
+                        )
+                    }
+                    {
+                        new Array(remainingDays).fill(0).map((val,idx)=>{
+                            return (
+                                <CardEmpty/>
+                            )
+                        }   
+                    )
+                    }
+                    </div>
+                <Footer/>
             </div>
         )
     }
@@ -46,18 +68,15 @@ class Calendar extends React.Component{
 
 const mapDispatchToProps = dispatch =>({
     callCurrentThenSet: () => dispatch(callCurrentThenSet()),
-    backOneMonthThenSet: dateObj => dispatch(backOneMonthThenSet(dateObj)),
-    addOneMonthThenSet: dateObj => dispatch(addOneMonthThenSet(dateObj)),
     fetchMonthEventStartAsnyc: id => dispatch(fetchMonthEventStartAsnyc(id)),
     fetchAllEventStartAsnyc: () => dispatch(fetchAllEventStartAsnyc())
 })
 
 const mapStateToProps = state => ({
-    currentDate: state.date.current,
     num: state.date.daysNum, 
     month: state.date.curMonthNum,
+    startDay: state.date.startOfMonth,
     year: state.date.curYear,
-    currentEvents: state.eventsDir.events
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Calendar)

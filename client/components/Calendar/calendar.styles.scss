@@ -1,4 +1,9 @@
 .calendar {
-    display: flex;
-    flex-wrap: wrap;
+    width: 100vw;
+
+    &__grid{
+        display: flex;
+        flex-wrap: wrap;
+        height: 90vh;
+    }
 }

@@ -1,0 +1,15 @@
+.task{
+    display: flex;
+    justify-content: center;
+    background-color: red;
+    color: white;
+    height: 2rem;
+   
+
+    &__name{
+        align-self: center;
+        text-align: center;
+        width: 100%;
+        text-transform: uppercase;
+    }
+}

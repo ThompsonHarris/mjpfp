@@ -22,8 +22,6 @@ body {
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    width: 80%;
-    max-width: 110rem;
-    min-width: 20rem;
+    width: 100%;
     min-height: 100vh;
 }
