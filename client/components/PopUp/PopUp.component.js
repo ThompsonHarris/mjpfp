@@ -14,10 +14,10 @@ class PopUp extends React.Component{
     render(){
         return(
             <div className='popup'>
-                <div className='popup_inner'>
-                    <div onClick={()=>this.props.navToggleMenu()}>close</div>
+                <div className='popup__inner'>
+                    <div className='popup__inner__close' onClick={()=>this.props.navToggleMenu()}>X</div>
                     {
-                        this.props.type==='add'?<AddEvent/>:<UpdateEvent/>
+                        this.props.data.type==='add'?<AddEvent {...this.props.data} />:<UpdateEvent {...this.props.data} />
                     }
                 </div>
             </div>
@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = state => ({
-    type: state.navigation.displayType
+    data: state.navigation.initData
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(PopUp)

@@ -4,15 +4,15 @@ export const navToggleMenu = () => ({
     type:navActionTypes.TOGGLE_NAV
 })
 
-export const setNavType = (str) => ({
+export const setNavTypeAndInit = (obj) => ({
     type:navActionTypes.SET_NAV_TYPE,
-    payload: str
+    payload: obj
 })
 
-export const toggleAndSetType = (type) => {
+export const toggleSetTypeAndinitData = (obj) => {
     return dispatch => {
         dispatch(navToggleMenu())
-        dispatch(setNavType(type))
+        dispatch(setNavTypeAndInit(obj))
     }
 }
 

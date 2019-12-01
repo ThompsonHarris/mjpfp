@@ -3,20 +3,20 @@ import './Task.style.scss'
 
 //Redux
 import {connect} from 'react-redux'
-import {toggleAndSetType} from '../../redux/nav/nav.actions'
+import {toggleSetTypeAndinitData} from '../../redux/nav/nav.actions'
 
 const Task = (props) => {
     return(
         <div className='task'>
             <div className='task__name'>
-                <a onClick={(e)=>props.toggleAndSetType('update')}>{props.name}</a>
+                <a onClick={(e)=>props.toggleSetTypeAndinitData({type:'update',...props})}>{props.name}</a>
             </div>
         </div>
     )
 }
 
 const mapDispatchToProps = dispatch => ({
-    toggleAndSetType: type=>dispatch(toggleAndSetType(type))
+    toggleSetTypeAndinitData: obj=>dispatch(toggleSetTypeAndinitData(obj))
 })
 
 export default connect(null,mapDispatchToProps)(Task)

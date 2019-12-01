@@ -14,7 +14,7 @@ const navReducer = (state=INITIAL_STATE,action) => {
         case(navActionTypes.SET_NAV_TYPE):
             return{
                 ...state,
-                displayType: action.payload
+                initData: action.payload
             }
         default:
             return state

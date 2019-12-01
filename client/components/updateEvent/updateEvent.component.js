@@ -1,17 +1,21 @@
 import React from 'react'
+import './update.style.scss'
+
+//Redux
 import {connect} from 'react-redux'
-import {updateEventStartAsync} from '../../redux/events/events.actions'
+import {updateEventStartAsync,deleteEventStartAsync} from '../../redux/events/events.actions'
+import {navToggleMenu} from '../../redux/nav/nav.actions'
+
 
 class UpdateEvent extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            id: '',
-            name: '',
-            year: '',
-            month: '',
-            day: '',
-            description: ''
+            name: this.props.name,
+            year: this.props.year,
+            month: this.props.month,
+            day: this.props.day,
+            description: this.props.description
         }
     }
     onChangeHandler=(e)=>{
@@ -29,9 +33,9 @@ class UpdateEvent extends React.Component{
             Day: this.state.day,
             Description: this.state.description
         }
-        this.props.updateEventStartAsync(Number(this.state.id),payload)
+        this.props.updateEventStartAsync(Number(this.props.id),payload,this.props.month)
+        this.props.navToggleMenu()
         this.setState({
-            id: '',
             name: '',
             year: '',
             month: '',
@@ -40,32 +44,41 @@ class UpdateEvent extends React.Component{
         })
     }
 
+    onhandleDelete=(e)=>{
+        e.preventDefault()
+        this.props.deleteEventStartAsync(this.props.id,this.props.month)
+        this.props.navToggleMenu()
+    }
+
 
     render(){
+        console.log(this.props)
         return(
-            <div>
+            <div className='updateevent'>
+                <div className='updateevent__header'> Update this event id:{this.props.id}</div>
                 <form onSubmit={this.onHandleSubmit}>
-                    <label>id</label>
-                    <input name='id' placeholder='id' onChange={(e)=>this.onChangeHandler(e)} value={this.state.id}></input>
                     <label>name</label>
-                    <input name='name' placeholder='name' onChange={(e)=>this.onChangeHandler(e)} value={this.state.name}></input>
+                    <input name='name' placeholder='name' onChange={(e)=>this.onChangeHandler(e)} value={this.state.name} required></input>
                     <label>year</label>
-                    <input name='year' placeholder='year' onChange={(e)=>this.onChangeHandler(e)} value={this.state.year}></input>
+                    <input name='year' placeholder='year' onChange={(e)=>this.onChangeHandler(e)} value={this.state.year} required></input>
                     <label>month</label>
-                    <input name='month' placeholder='month' onChange={(e)=>this.onChangeHandler(e)} value={this.state.month}></input>
+                    <input name='month' placeholder='month' onChange={(e)=>this.onChangeHandler(e)} value={this.state.month} required></input>
                     <label>day</label>
-                    <input name='day' placeholder='day' onChange={(e)=>this.onChangeHandler(e)} value={this.state.day}></input>
+                    <input name='day' placeholder='day' onChange={(e)=>this.onChangeHandler(e)} value={this.state.day} required></input>
                     <label>description</label>
-                    <input name='description' placeholder='description' onChange={(e)=>this.onChangeHandler(e)} value={this.state.description}></input>
-                    <button>Update</button>
+                    <textarea name='description' placeholder='description' onChange={(e)=>this.onChangeHandler(e)} value={this.state.description} cols="33" rows="5" required></textarea>
+                    <button type='submit'>Update</button>
                 </form>
+                    <button type='delete' onClick={this.onhandleDelete}>DELETE</button>
             </div>
         )
     }
 }
 
 const mapDispatchToProps = dispatch =>({
-    updateEventStartAsync: (id,payload)=>dispatch(updateEventStartAsync(id,payload))
+    updateEventStartAsync: (id,payload,month)=>dispatch(updateEventStartAsync(id,payload,month)),
+    deleteEventStartAsync: (id,month)=>dispatch(deleteEventStartAsync(id,month)),
+    navToggleMenu: ()=>dispatch(navToggleMenu())
 })
 
 export default connect(null,mapDispatchToProps)(UpdateEvent)

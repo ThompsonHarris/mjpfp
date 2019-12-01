@@ -20,17 +20,17 @@ class Calendar extends React.Component{
     async componentDidMount(){
         await this.props.callCurrentThenSet()
         await this.props.fetchMonthEventStartAsnyc(this.props.month)
+        console.log('mounting....')
     }
 
     componentDidUpdate(prevProps){
-        if ( this.props.month !== prevProps.month ) {
+        if (this.props.month !== prevProps.month) {
             this.props.fetchMonthEventStartAsnyc(this.props.month)
         }
     }
 
     render(){
         const remainingDays = Math.abs(((this.props.startDay+this.props.num)%7)-7)===7?0:Math.abs(((this.props.startDay+this.props.num)%7)-7)
-        console.log(remainingDays)
         return(
             <div class='calendar'>
                 <Navigation/>
@@ -77,6 +77,7 @@ const mapStateToProps = state => ({
     month: state.date.curMonthNum,
     startDay: state.date.startOfMonth,
     year: state.date.curYear,
+    events: state.eventsDir.events
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Calendar)

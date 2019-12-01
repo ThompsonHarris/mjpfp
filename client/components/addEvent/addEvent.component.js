@@ -1,4 +1,7 @@
 import React from 'react'
+import './addEvent.style.scss'
+
+//Redux
 import {connect} from 'react-redux'
 import {createEventStartAsync} from '../../redux/events/events.actions'
 import {navToggleMenu} from '../../redux/nav/nav.actions'
@@ -8,9 +11,6 @@ class AddEvent extends React.Component{
         super(props)
         this.state={
             name: '',
-            year: '',
-            month: '',
-            day: '',
             description: ''
         }
     }
@@ -24,38 +24,29 @@ class AddEvent extends React.Component{
         e.preventDefault()
         const payload = {
             Name: this.state.name,
-            Year: this.state.year,
-            Month: this.state.month,
-            Day: this.state.day,
+            Year: this.props.year,
+            Month: this.props.month,
+            Day: this.props.day,
             Description: this.state.description
         }
-        this.props.createEventStartAsync(payload,this.props.month)
+        this.props.createEventStartAsync(payload,this.props.monthNum)
         this.props.navToggleMenu()
         this.setState({
             name: '',
-            year: '',
-            month: '',
-            day: '',
             description: ''
         })
     }
 
-
     render(){
         return(
-            <div>
+            <div className='addevent'>
+               <div className='addevent__header'> Add an Event for {this.props.monthName} {this.props.day} </div>
                 <form onSubmit={this.onHandleSubmit}>
                     <label>name</label>
-                    <input name='name' placeholder='name' onChange={(e)=>this.onChangeHandler(e)} value={this.state.name}></input>
-                    <label>year</label>
-                    <input name='year' placeholder='year' onChange={(e)=>this.onChangeHandler(e)} value={this.state.year}></input>
-                    <label>month</label>
-                    <input name='month' placeholder='month' onChange={(e)=>this.onChangeHandler(e)} value={this.state.month}></input>
-                    <label>day</label>
-                    <input name='day' placeholder='day' onChange={(e)=>this.onChangeHandler(e)} value={this.state.day}></input>
-                    <label>name</label>
-                    <input name='description' placeholder='description' onChange={(e)=>this.onChangeHandler(e)} value={this.state.description}></input>
-                    <button>Submit</button>
+                    <input name='name' onChange={(e)=>this.onChangeHandler(e)} value={this.state.name} required></input>
+                    <label>Description</label>
+                    <textarea name='description' onChange={(e)=>this.onChangeHandler(e)} value={this.state.description} cols="33" rows="5" required></textarea>
+                    <button>create</button>
                 </form>
             </div>
         )
@@ -68,7 +59,8 @@ const mapDispatchToProps = dispatch =>({
 })
 
 const mapStateToProps = state => ({
-    month: state.date.curMonthNum,
+    monthNum: state.date.curMonthNum,
+    monthName: state.date.curMonthStr,
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(AddEvent)

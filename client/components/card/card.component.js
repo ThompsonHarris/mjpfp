@@ -4,7 +4,7 @@ import './card.styles.scss'
 //redux
 import {connect} from 'react-redux'
 import {createEventStartAsync,deleteEventStartAsync} from '../../redux/events/events.actions'
-import {toggleAndSetType} from '../../redux/nav/nav.actions'
+import {toggleSetTypeAndinitData} from '../../redux/nav/nav.actions'
 
 //Components
 import Task from '../Task/Task.components'
@@ -34,12 +34,12 @@ class Card extends React.Component{
             this.props.events.map(({id,Name,Year,Month,Day,Description})=>{
                 if(this.props.year===Year && this.props.month===Month && this.props.day===Day){
                     return (
-                        <Task id={id} name={Name} year={Year} day={Day} description={Description} />
+                        <Task id={id} name={Name} month={Month} year={Year} day={Day} description={Description} />
                     )
                 }
             })
         }
-        <div className='card__add' onClick={(e)=>this.props.toggleAndSetType('add')}>+</div>
+        <div className='card__add' onClick={(e)=>this.props.toggleSetTypeAndinitData({type:'add',year:this.props.year,month:this.props.month,day:this.props.day})}>+</div>
         </div>
     )
 }
@@ -47,8 +47,7 @@ class Card extends React.Component{
 
 const mapDispatchToProps = dispatch =>({
     createEventStartAsync: (payload,month)=>dispatch(createEventStartAsync(payload,month)),
-    deleteEventStartAsync: (id,month)=>dispatch(deleteEventStartAsync(id,month)),
-    toggleAndSetType: (type)=>dispatch(toggleAndSetType(type))
+    toggleSetTypeAndinitData: (type)=>dispatch(toggleSetTypeAndinitData(type))
 })
 
 const mapStateToProps = state =>({

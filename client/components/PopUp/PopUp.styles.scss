@@ -9,14 +9,21 @@
     margin: auto;  
     background-color: rgba(0,0,0, 0.5); 
 
-      &_inner {  
+      &__inner {  
         position: absolute;  
         left: 25%;  
         right: 25%;  
-        top: 25%;  
-        bottom: 25%;  
+        top: 0;  
+        height: auto; 
         padding: 20px;
         margin: auto;  
         background: white;  
+
+        &__close{
+          position: absolute;
+          top:.5rem;
+          right:.5rem;
+          font-size: 2rem;
+        }
       } 
   }  
