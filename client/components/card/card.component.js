@@ -3,7 +3,7 @@ import './card.styles.scss'
 
 //redux
 import {connect} from 'react-redux'
-import {createEventStartAsync,deleteEventStartAsync} from '../../redux/events/events.actions'
+import {createEventStartAsync, updateEventStartAsync} from '../../redux/events/events.actions'
 import {toggleSetTypeAndinitData} from '../../redux/nav/nav.actions'
 
 //Components
@@ -26,9 +26,22 @@ class Card extends React.Component{
         this.props.createEventStartAsync(payload,month)
     }
 
+    onDragOverHandler = (e)=>{
+        e.preventDefault()
+    }
+
+    onDropHandler = (e)=>{
+        e.preventDefault()
+        const payload = {
+            Day: this.props.day
+        }
+        this.props.updateEventStartAsync(Number(e.dataTransfer.getData("text/plain")),payload,this.props.month)
+    }
+
+   
    render(){
        return(
-        <div className='card'>
+        <div className='card' onDrop={(e)=>this.onDropHandler(e)} onDragOver={(e)=>this.onDragOverHandler(e)}>
         <div className='card__num'>{this.props.day}</div>
         {
             this.props.events.map(({id,Name,Year,Month,Day,Description})=>{
@@ -47,6 +60,7 @@ class Card extends React.Component{
 
 const mapDispatchToProps = dispatch =>({
     createEventStartAsync: (payload,month)=>dispatch(createEventStartAsync(payload,month)),
+    updateEventStartAsync: (id,payload,month)=>dispatch(updateEventStartAsync(id,payload,month)),
     toggleSetTypeAndinitData: (type)=>dispatch(toggleSetTypeAndinitData(type))
 })
 
@@ -55,6 +69,3 @@ const mapStateToProps = state =>({
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Card)
-
-//<div onClick={(e)=>this.onHandleSubmit(this.props.year,this.props.month,this.props.day)}>+</div>
-//<a onClick={(e)=>this.props.deleteEventStartAsync(id,this.props.month)}>{Name}</a>

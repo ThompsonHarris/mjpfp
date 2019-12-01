@@ -11,9 +11,15 @@ import UpdateEvent from '../updateEvent/updateEvent.component'
 
 class PopUp extends React.Component{
 
+onHandleClick = (e) => {
+    if(e.target.title==='outside'){
+        this.props.navToggleMenu()
+    }
+}
+
     render(){
         return(
-            <div className='popup'>
+            <div className='popup' title='outside' onClick={(e)=>this.onHandleClick(e)}>
                 <div className='popup__inner'>
                     <div className='popup__inner__close' onClick={()=>this.props.navToggleMenu()}>X</div>
                     {
