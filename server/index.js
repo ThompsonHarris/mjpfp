@@ -1,6 +1,5 @@
 const app = require('./app')
 const {db} = require('./db/index')
-const seed = require('./db/seed')
 const PORT  = process.env.PORT || 3000
 
 db.sync()
