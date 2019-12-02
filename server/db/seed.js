@@ -47,8 +47,8 @@ const seed = () => {
     ]
 
     
-        const [thompson,ruthie,grier] = await Promise.all(usersToBe.map(obj=>User.create(obj)))
-        const [Halloween,Christmas] = await Promise.all(eventsToBe.map(obj=>Event.create(obj)))
+        const [thompson,ruthie,grier] = Promise.all(usersToBe.map(obj=>User.create(obj)))
+        const [Halloween,Christmas] = Promise.all(eventsToBe.map(obj=>Event.create(obj)))
     
     
 }
