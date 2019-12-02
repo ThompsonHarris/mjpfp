@@ -1,6 +1,6 @@
 const {db,User,Event} = require('./index')
 
-const seed = async () => {
+const seed = () => {
     const usersToBe = [
         {
             firstName: 'First',
@@ -45,20 +45,15 @@ const seed = async () => {
             Completion: false
         }
     ]
-
     
+    db.sync({ force: true })
+    .then(async()=>{
         const [thompson,ruthie,grier] = await Promise.all(usersToBe.map(obj=>User.create(obj)))
         const [Halloween,Thanksgiving,Christmas] = await Promise.all(eventsToBe.map(obj=>Event.create(obj)))
-    
+    })
     
 }
 
-seed()
-
-//db.sync({ force: true })
-// .then(async()=>{
-//     const [thompson,ruthie,grier] = await Promise.all(usersToBe.map(obj=>User.create(obj)))
-//     const [Halloween,Christmas] = await Promise.all(eventsToBe.map(obj=>Event.create(obj)))
-// })
+//seed()
 
 module.exports=seed
