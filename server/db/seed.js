@@ -3,19 +3,19 @@ const {db,User,Event} = require('./index')
 const seed = () => {
     const usersToBe = [
         {
-            firstName: 'Thompson',
-            lastName: 'Harris',
-            email: 'Tharris@gmail.com'
+            firstName: 'First',
+            lastName: 'User',
+            email: 'FirstUser@gmail.com'
         },
         {
-            firstName: 'Ruthie',
-            lastName: 'Harris',
-            email: 'RHarris@aol.com'
+            firstName: 'Second',
+            lastName: 'User',
+            email: 'SecondUser@aol.com'
         },
         {
-            firstName: 'Grier',
-            lastName: 'Harris',
-            email: 'GHarris@aol.com'
+            firstName: 'Third',
+            lastName: 'User',
+            email: 'ThirdUser@aol.com'
         }
     ]
     const eventsToBe = [
@@ -23,23 +23,26 @@ const seed = () => {
             Name: 'Halloween',
             Year: '2019',
             Month: '10',
-            Day: '23',
-            Description: 'for ghosts and goblins'
+            Day: '31',
+            Description: 'for ghosts and goblins',
+            Completion: false
         },
         {
             Name: 'Thanksgiving',
             Year: '2019',
             Month: '11',
             Day: '28',
-            Description: 'for fat Prilgrims and turkey'
+            Description: 'for fat Prilgrims and turkey',
+            Completion: false
         }
         ,
         {
-            Name: 'Chistmas',
+            Name: 'Christmas',
             Year: '2019',
             Month: '12',
             Day: '25',
-            Description: 'for ginger bread men and raindear'
+            Description: 'for ginger bread men and raindear',
+            Completion: false
         }
     ]
     db.sync({ force: true })

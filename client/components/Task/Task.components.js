@@ -13,11 +13,22 @@ class Task extends React.Component{
 
     render(){
         return(
-            <div className='task'>
+            <>
+            {
+                this.props.Completion===true?
+                <div className='taskComplete'>
+                <div className='task__name' onClick={(e)=>this.props.toggleSetTypeAndinitData({type:'update',...this.props})} >
+                    {this.props.name}
+                </div>
+                </div>
+                :
+                <div className={this.props.past===true?'taskPast':'task'}>
                 <div className='task__name' draggable="true" onDragStart={(e)=>{this.onDragStartHandler(e)}} onClick={(e)=>this.props.toggleSetTypeAndinitData({type:'update',...this.props})} >
                     {this.props.name}
                 </div>
-            </div>
+                </div>
+            }
+            </>
         )
     }
 }

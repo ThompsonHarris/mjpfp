@@ -50,6 +50,15 @@ class UpdateEvent extends React.Component{
         this.props.navToggleMenu()
     }
 
+    onhandleComplete=(e)=>{
+        e.preventDefault()
+        const payload = {
+            Completion: true
+        }
+        this.props.updateEventStartAsync(Number(this.props.id),payload,this.props.month)
+        this.props.navToggleMenu()
+    }
+
 
     render(){
         console.log(this.props)
@@ -69,7 +78,8 @@ class UpdateEvent extends React.Component{
                     <textarea name='description' placeholder='description' onChange={(e)=>this.onChangeHandler(e)} value={this.state.description} cols="33" rows="5" required></textarea>
                     <button type='submit'>Update</button>
                 </form>
-                    <button type='delete' onClick={this.onhandleDelete}>DELETE</button>
+                    <button className='updateevent__completeButton' type='delete' onClick={this.onhandleComplete}>COMPLETE</button>
+                    <button className='updateevent__deleteButton' type='delete' onClick={this.onhandleDelete}>DELETE</button>
             </div>
         )
     }

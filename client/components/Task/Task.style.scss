@@ -1,9 +1,44 @@
 .task{
     display: flex;
     justify-content: center;
-    background-color: red;
+    background-color: rgb(30, 214, 168);;
+    color: black;
+    height: 2rem;
+    cursor: grab;
+   
+
+    &__name{
+        align-self: center;
+        text-align: center;
+        width: 100%;
+        text-transform: uppercase;
+    }
+}
+
+.taskPast{
+    display: flex;
+    justify-content: center;
+    background-color:rgb(253, 55, 55);
     color: white;
     height: 2rem;
+    cursor: grab;
+   
+
+    &__name{
+        align-self: center;
+        text-align: center;
+        width: 100%;
+        text-transform: uppercase;
+    }
+}
+
+.taskComplete{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    height: 2rem;
+    cursor: grab;
    
 
     &__name{

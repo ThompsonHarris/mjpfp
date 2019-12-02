@@ -1,6 +1,11 @@
 import dateActionTypes from './date.types'
 import moment from 'moment'
 
+export const setPresentDate = (dateObj) => ({
+    type:dateActionTypes.SET_PRESENT_DATE,
+    payload: dateObj
+})
+
 export const setCurrentDate = (dateObj) => ({
     type:dateActionTypes.SET_CURRENT_DATE,
     payload: dateObj
@@ -31,6 +36,16 @@ export const setCurrentYear = (year) => ({
     type:dateActionTypes.SET_CURRENT_YEAR,
     payload: year
 })
+
+export const callPresentAndSet = () => {
+    return dispatch => {
+        let presentDate  = moment()
+        let presYear = presentDate.year()
+        let presMonth = presentDate.month()
+        let presDay = presentDate.format('D')
+        dispatch(setPresentDate({year:presYear,month:(presMonth+1),day:Number(presDay)}))
+    }
+}
 
 
 

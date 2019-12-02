@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const {STRING,INTEGER} = Sequelize
+const {STRING,INTEGER,BOOLEAN} = Sequelize
 
 const Event = db.define('event',{
     Name: {
@@ -36,6 +36,10 @@ const Event = db.define('event',{
         type: STRING,
         allowNull: false
       },
+    Completion: {
+       type: BOOLEAN,
+       allowNull: false
+     }
   })
   
   module.exports = Event

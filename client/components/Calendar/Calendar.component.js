@@ -1,9 +1,12 @@
 import React from 'react'
 import './calendar.styles.scss'
 
+//Utils
+import moment from 'moment'
+
 //Redux
 import {connect} from 'react-redux'
-import {backOneMonthThenSet,addOneMonthThenSet,callCurrentThenSet} from '../../redux/date/date.actions'
+import {callCurrentThenSet,callPresentAndSet} from '../../redux/date/date.actions'
 import {fetchMonthEventStartAsnyc,fetchAllEventStartAsnyc} from '../../redux/events/events.actions'
 
 //component
@@ -19,6 +22,7 @@ class Calendar extends React.Component{
 
     async componentDidMount(){
         await this.props.callCurrentThenSet()
+        await this.props.callPresentAndSet()
         await this.props.fetchMonthEventStartAsnyc(this.props.month)
         console.log('mounting....')
     }
@@ -46,7 +50,12 @@ class Calendar extends React.Component{
                     {
                         new Array(this.props.num).fill(0).map((val,idx)=>{
                                 return (
-                                    <Card year={this.props.year} month={this.props.month} day={idx+1}/>
+                                    <Card 
+                                    past={moment(`${this.props.year}-${this.props.month}-${idx+1}`).isBefore(`${this.props.present.year}-${this.props.present.month}-${this.props.present.day}`)}
+                                    presentDay={this.props.year===this.props.present.year&&this.props.month===this.props.present.month&&(idx+1)===this.props.present.day?true:false}
+                                    year={this.props.year} 
+                                    month={this.props.month} 
+                                    day={idx+1}/>
                                 )
                             }   
                         )
@@ -69,7 +78,8 @@ class Calendar extends React.Component{
 const mapDispatchToProps = dispatch =>({
     callCurrentThenSet: () => dispatch(callCurrentThenSet()),
     fetchMonthEventStartAsnyc: id => dispatch(fetchMonthEventStartAsnyc(id)),
-    fetchAllEventStartAsnyc: () => dispatch(fetchAllEventStartAsnyc())
+    fetchAllEventStartAsnyc: () => dispatch(fetchAllEventStartAsnyc()),
+    callPresentAndSet: () => dispatch(callPresentAndSet())
 })
 
 const mapStateToProps = state => ({
@@ -77,7 +87,8 @@ const mapStateToProps = state => ({
     month: state.date.curMonthNum,
     startDay: state.date.startOfMonth,
     year: state.date.curYear,
-    events: state.eventsDir.events
+    events: state.eventsDir.events,
+    present: state.date.present
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Calendar)

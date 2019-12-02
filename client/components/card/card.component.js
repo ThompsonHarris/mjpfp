@@ -41,13 +41,14 @@ class Card extends React.Component{
    
    render(){
        return(
-        <div className='card' onDrop={(e)=>this.onDropHandler(e)} onDragOver={(e)=>this.onDragOverHandler(e)}>
+        <div className={this.props.past===true?'cardPast':'card'} onDrop={(e)=>this.onDropHandler(e)} onDragOver={(e)=>this.onDragOverHandler(e)}>
         <div className='card__num'>{this.props.day}</div>
+        {this.props.presentDay===true?(<div className='card__present'>TODAY</div>):null}
         {
-            this.props.events.map(({id,Name,Year,Month,Day,Description})=>{
+            this.props.events.map(({id,Name,Year,Month,Day,Description,Completion})=>{
                 if(this.props.year===Year && this.props.month===Month && this.props.day===Day){
                     return (
-                        <Task id={id} name={Name} month={Month} year={Year} day={Day} description={Description} />
+                        <Task past={this.props.past} id={id} name={Name} month={Month} year={Year} day={Day} description={Description} Completion={Completion}/>
                     )
                 }
             })

@@ -27,7 +27,8 @@ class AddEvent extends React.Component{
             Year: this.props.year,
             Month: this.props.month,
             Day: this.props.day,
-            Description: this.state.description
+            Description: this.state.description,
+            Completion: false
         }
         this.props.createEventStartAsync(payload,this.props.monthNum)
         this.props.navToggleMenu()

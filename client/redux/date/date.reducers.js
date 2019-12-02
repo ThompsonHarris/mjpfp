@@ -4,11 +4,21 @@ const INITIAL_STATE = {
     current: ['test'],
     curMonthNum: 0,
     startOfMonth: 0,
-    daysNum: 0
+    daysNum: 0,
+    present:{
+        day: 0,
+        month: 0,
+        year: 0
+    }
 }
 
 const dateReducer = (state=INITIAL_STATE, action)=>{
     switch(action.type){
+        case(dateActionTypes.SET_PRESENT_DATE):
+        return{
+            ...state,
+            present: action.payload
+        }
         case(dateActionTypes.SET_CURRENT_DATE):
         return{
             ...state,
