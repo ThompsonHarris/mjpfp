@@ -10,8 +10,7 @@
     "build": "./node_modules/.bin/webpack --mode=\"production\"",
     "start": "node ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node ./server/db/seed.js",
-    "postinstall": "npm run seed"
+    "seed": "node ./server/db/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -47,3 +46,4 @@
     "style-loader": "^1.0.0"
   }
 }
+

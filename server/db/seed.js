@@ -48,7 +48,6 @@ const seed = () => {
     
     db.sync()
     .then(async()=>{
-        const [thompson,ruthie,grier] = await Promise.all(usersToBe.map(obj=>User.create(obj)))
         const [Halloween,Thanksgiving,Christmas] = await Promise.all(eventsToBe.map(obj=>Event.create(obj)))
     })
     
