@@ -61,7 +61,6 @@ class UpdateEvent extends React.Component{
 
 
     render(){
-        console.log(this.props)
         return(
             <div className='updateevent'>
                 <div className='updateevent__header'> Update this event id:{this.props.id}</div>
